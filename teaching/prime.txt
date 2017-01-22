@@ -1,0 +1,7 @@
+In mathematics, a prime number (or a prime) is a natural number which hsa
+exactly two distinct natural number divisors: 1 and itself. An infinitude of
+prime numbers exists, as demonstrated by Euclid around 300 BC. The first
+five prmie numbers are:
+
+   2, 3, 5, 7, 11
+

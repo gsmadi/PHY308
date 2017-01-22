@@ -1,0 +1,241 @@
+\documentclass[11pt]{article}
+
+\usepackage{epsfig,amsmath}
+
+%\newenvironment{CFigure}[1][tbp]{\begin{figure}[#1]\centering}%
+   %                             {\end{figure}}
+
+%\newenvironment{CTable}[1][tbp]{\begin{table}[#1]\centering}%
+           %                     {\end{table}}
+
+ \def\etal{{\it et al.}}
+ \def\bar{\overline}
+ \def\bea{\begin{eqnarray}}
+ \def\eea{\end{eqnarray}}
+ \def\spose#1{\hbox to 0pt{#1\hss}}
+ \def\gtapprox{\mathrel{\spose{\lower 3pt\hbox{$\mathchar"218$}}
+ \raise 2.0pt\hbox{$\mathchar"13E$}}}
+
+%\renewcommand{\baselinestretch}{1.5}
+
+\topmargin -0.5in        % read Lamport p.163
+\oddsidemargin 0.0in   % read Lamport p.163
+\evensidemargin 0.0in  % same as oddsidemargin but for left-hand pages
+
+\textwidth 6.5in \textheight 9.0in
+
+\begin{document}
+
+\title{Notes on $B\to D\ell\nu$}
+
+\author{Jack Laiho}
+
+
+\date{\today}
+
+\maketitle
+
+\section{Introduction}
+
+The matrix elements relevant for $B\to D$ are
+%
+\bea\label{eq:R+} R_+(p) = \langle D(p)|V_4 |B(0) \rangle,
+\eea
+%
+\bea\label{eq:R-} R_-(p) = \frac{\langle D(p)|V_1 |B(0) \rangle}{\langle D(p)|V_4 |B(0) \rangle},
+\eea
+%
+\bea\label{eq:xf} x_f(p) = \frac{\langle D(p)|V_1 |D(0) \rangle}{\langle D(p)|V_4 |D(0) \rangle},
+\eea
+%
+and the form factors can be written in terms of these quantities,
+%
+\bea h_+(w)=R_+(1-x_f R_-), \ \ \ \ \ \ h_-(w)=R_+\left(1-\frac{R_-}{x_f}\right),
+\eea
+%
+\bea  w=\frac{1+x_f^2}{1-x_f^2}.
+\eea
+%
+Note that the form-factors are usually expressed in terms of $w=v' \cdot v$, the velocity transfer from the initial to the final state.
+
+We can extract these quantities from the lattice correlation functions as follows:  First we need to extract the parameters from the two-point correlators,
+
+\bea C_D^{\rm 2pt}(p)_{(1S,1S)}=Z_D(p)_{(1S,1S)}e^{-E_Dt},
+\eea
+%
+\bea C_B^{\rm 2pt}(p)_{(1S,1S)}=Z_B(p)_{(1S,1S)}e^{-E_Bt},
+\eea
+%
+\bea C_D^{\rm 2pt}(p)_{(d,d)}=Z_D(p)_{(d,d)}e^{-E_Dt}.
+\eea
+%
+These formulas are true in the large time limit where the ground state dominates, and they define my notation for the normalization of the correlators.  The subscripts in parentheses are the source and sink for the meson correlators.  The d is a local point source, while 1S is a 1S wavefunction smearing.  We use both in the extraction of the matrix elements from the three-point correlators.
+
+
+The ratio $R_{+}$ (related to $h_+$) can be extracted from lattice three-point correlators using
+
+\bea\label{eq:Rplus_d} R_{+}^d(t,p) = \frac{C^{B\to D}_{V_4,(1S,d)}(t,p)}{\sqrt{C^{D\to D}_{V_4,(1S,1S)}(t,0) C^{B\to B}_{V_4,(1S,1S)}(t,0)}}\sqrt{\frac{Z_D(0)_{(1S,1S)}E_D}{Z_D(p)_{(d,d)}m_D}} \ \ e^{E_D t-\frac{1}{2}m_DT}e^{-m_B(t-\frac{1}{2}T)},
+\eea
+%
+where $C^{P\to D}_{\Gamma}(p)_{\rm (src,snk)}$ is a $P\to D$ three-point function with local current $\Gamma$, parent meson smearing labeled src, and daughter meson smearing labeled snk.  The variables t and T are the current location and the source-sink separation, respectively.  The source is at time 0.  The dependence on momentum is included for all quantities, except for $E_D$, where it is implicit.  We can obtain the same matrix element from correlators with a different set of source-sink smearings,  
+%
+\bea\label{eq:Rplus_1S} R_{+}^{1S}(t,p) = \frac{C^{B\to D}_{V_4,(1S,1S)}(t,p)}{\sqrt{C^{D\to D}_{V_4,(1S,1S)}(t,0) C^{B\to B}_{V_4,(1S,1S)}(t,0)}}\sqrt{\frac{Z_D(0)_{(1S,1S)}E_D}{Z_D(p)_{(1S,1S)}m_D}} \ \ e^{E_D t-\frac{1}{2}m_DT}e^{-m_B(t-\frac{1}{2}T)}.
+\eea
+%
+In practice, the excited state contamination is somewhat large, so using data with the two different smearings is helpful.  We also need the ratios
+%
+\bea R_{-}(p)=\frac{C^{B\to D}_{V_1}(p)_{(1S,1S)}}{C^{B\to D}_{V_4}(p)_{(1S,1S)}}=\frac{C^{B\to D}_{V_1}(p)_{(1S,d)}}{C^{B\to D}_{V_4}(p)_{(1S,d)}},
+\eea
+%
+\bea x_f(p)=\frac{C^{D\to D}_{V_1}(p)_{(1S,1S)}}{C^{D\to D}_{V_4}(p)_{(1S,1S)}}=\frac{C^{D\to D}_{V_1}(p)_{(1S,d)}}{C^{D\to D}_{V_4}(p)_{(1S,d)}}.
+\eea
+
+The above equations are only true in the limit where the distances between the current and the source and the sink are taken to be large so that the ground state dominates.  In order to minimize the effect of wrong-parity states, I have been using an average of these quantities over source-sink separation,
+%
+\bea \overline{R}(0,t,T) \equiv \frac{1}{2}R(0,t,T)+\frac{1}{4}R(0,t,T+1)+\frac{1}{4}R(0,t+1,T+1).
+\eea
+%
+The ratios for the above correlators were chosen so that the $Z$ factors largely cancel, leaving only $\rho$ factors that should be close to 1.  We will also need these $\rho$ factors to match the lattice currents to continuum currents.
+
+\section{First look at data}
+
+The ratios $R_+^d$ and $R_+^{1S}$ are plotted for momenta $p_D=(1,0,0)$ and $p_D=(1,1,0)$ in Figure~\ref{fig:Rplus_p100} and Figure~\ref{fig:Rplus_p110}, respectively.  I take a linear combination of the (d,1S) smearing and the (1S,1S) smearing in order to minimize the excited state contamination on the $D$ meson side (the left in Figs~\ref{fig:Rplus_p100} and \ref{fig:Rplus_p110}) of the three-point correlator.  It is clear from these plots (and others at higher momenta not shown here) that there exists an optimal linear combination of the two smearings where excited states on the left can be minimized, and stable plateaus can be found.  This is equivalent to optimizing the smearing function for the $D$ meson to be a narrower 1S function than the one chosen in the simulations, but different for each momentum value.  This method allows us to optimize the smearing after-the-fact for each momentum value without changing the smearing function at each momentum in the simulations.  
+
+As can be seen in Eqs.~\ref{eq:Rplus_d} and \ref{eq:Rplus_1S}, information is needed from the 2-point correlators to construct $R_+$.  For the 007/05 coarse ensemble, my 2-point fit results are shown in Table~\ref{tab:params}.  These come from separate fits to the $(d,d)$ and $(1S,1S)$ source-sink combinations.  I could presumably improve the fits by doing a combined fit to the different source-sink combinations.  I also find that $m_B=1.8443(15)$.  Table~\ref{tab:Rplus} shows my values for plateau fits to the linear combination corresponding to the optimal smearing for $R_+$.  The optimal values were determined by taking the linear combination of local and 1S smearing on the D side that gave rise to the best plateau for a given momentum, as judged by the quality of a plateau fit to at least four time slices.
+
+\begin{figure}
+\begin{center}
+ \includegraphics[scale=.45]{compare.eps}
+%\verb*+\includegraphics[scale=.55]{ratio_fid}+
+\end{center}
+\caption{Averaged ratio, $\overline{R}_{+}$, for two different smearing combinations for momentum $p_D=(1,0,0)$.  The fit is to the optimal linear combination of the two different smearings.
+\label{fig:Rplus_p100}}
+\end{figure}
+
+
+
+\begin{table}
+\begin{center}
+\caption{Values of two-point fit parameters on 007/05 ensemble from superscript run.}
+ \label{tab:params}
+\begin{tabular}{cccc}
+  \hline \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $p_D$ & $E_D$  \ & $Z_{D}(p)_{d,d}$  & $Z_{D}(p)_{1S,1S}$ \\
+  \hline
+  0 0 0  & 0.95713(90) & 0.07949(88) & 4.027(42) \\
+   1 0 0  & 1.0025(12) & 0.0761(11) & 2.985(35) \\
+   1 1 0  & 1.0457(16) & 0.0733(14) & 2.286(39) \\
+    1 1 1  & 1.0869(23) & 0.0708(19) & 1.799(50) \\
+     2 0 0  & 1.1230(35) & 0.0690(28) & 1.427(67) \\
+  \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+
+
+\begin{figure}
+\begin{center}
+ \includegraphics[scale=.45]{compare_p110.eps}
+%\verb*+\includegraphics[scale=.55]{ratio_fid}+
+\end{center}
+\caption{Averaged ratio, $\overline{R}_{+}$, for two different smearing combinations for momentum $p=(1,1,0)$.  The fit is to the optimal linear combination of the two different smearings.
+\label{fig:Rplus_p110}}
+\end{figure}
+
+
+\begin{table}
+\begin{center}
+\caption{Values of $R_{+}$, $x_f$, and $R_-$ on 007/05 ensemble from superscript run.}
+ \label{tab:Rplus}
+\begin{tabular}{cccc}
+  \hline \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $p_D$ & $R_+$ & $x_f$ & $R_-$ \\
+  \hline
+     1 0 0  & 0.9726(58) & 0.15002(75)  & 0.1683(11) \\
+   1 1 0  & 0.9371(96)  & 0.2076(12) & 0.2306(19)  \\
+    1 1 1  & 0.912(12) & 0.2475(16) & 0.2737(27) \\
+     2 0 0  & 0.897(16) & 0.2726(21) & 0.2975(33) \\
+  \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{Chiral Perturbation Theory}
+
+The formulas for $h_+(w)$ and $h_-(w)$ in staggered chiral perturbation theory in the full QCD case are
+
+\begin{eqnarray}\label{eq:h+full} h_{+}^{(B_u)QCD,2+1}(w)&=&
+1+\frac{X_{+}(\Lambda)}{m_c^2}+\frac{g^2_\pi}{16\pi^2f^2}\left[\frac{1}{16}\sum_{\Xi}\big(2F^+_{\pi_\Xi}+F^+_{K_\Xi}\big)
+-\frac{1}{2}F^+_{\pi_I}+\frac{1}{6}F^+_{\eta_I} \right.\nonumber
+\\ &&
++a^2\delta'_V\left(\frac{m^2_{S_V}-m^2_{\pi_V}}{(m^2_{\eta_V}-m^2_{\pi_V})(m^2_{\pi_V}-m^2_{\eta'_V})}F^+_{\pi_V}
++\frac{m^2_{\eta_V}-m^2_{S_V}}{(m^2_{\eta_V}-m^2_{\eta'_V})(m^2_{\eta_V}-m^2_{\pi_V})}F^+_{\eta_V}
+\right. \nonumber \\ && \left. \left.
++\frac{m^2_{S_V}-m^2_{\eta'_V}}{(m^2_{\eta_V}-m^2_{\eta'_V})(m^2_{\eta'_V}-m^2_{\pi_V})}F^+_{\eta'_V}\right)
++\big(V\rightarrow A\big) \right], \end{eqnarray}
+%
+\bea h_-^{(B_u)QCD, 2+1}(w) = \frac{X_-}{m_c},
+\eea
+where
+%
+\bea  F^+_j \equiv F^+(w, m_j, \Delta^{(c)}/m_j),
+\eea
+%
+and
+%
+\bea   F^+(w, m, x) = -2\left[(w+2)I_1(w, m, x)+(w^2-1)I_2(w, m, x)-\frac{3}{2}I_3(w, m, x) -\frac{3}{2}I_3(w, m, 0)\right],
+\eea
+%
+with
+%
+\bea  I_{i}(w, m, x)= -\left[m^2 x E_{1,2}(w) + m^2 x^2 \ln \left(\frac{m^2}{\Lambda^2} \right)G_{i}(w) +m^2x^2F_{i}(w, x)\right],
+\eea
+%
+where
+%
+\bea  E_1(w) = \frac{\pi}{w+1},
+\eea
+\bea  E_2(w) = \frac{-\pi}{(w+1)^2},
+\eea
+\bea  E_3(w) = \pi,
+\eea
+\bea  G_1(w) = \frac{-1}{2(w^2-1)}[w-r(w)],
+\eea
+\bea  G_2(w) = \frac{1}{2(w^2-1)^2}[w^2+2-3wr(w)],
+\eea
+\bea  G_3(w) = -1,
+\eea
+%
+with
+%
+\bea  r(w) = \frac{1}{\sqrt{w^2-1}}\ln (w+\sqrt{w^2-1}).
+\eea
+%
+\bea  F_1(x, w)= \frac{1}{x^2}\int_0^{\pi/2} d\theta \frac{a}{1+w \sin 2\theta} \left\{ \pi\left(\sqrt{1-a^2} -1\right)-2\left[\frac{1}{2}\sqrt{a^2-1}\ln \left(1-2a(a+\sqrt{a^2-1}) \right) -a \right] \right\}, \nonumber \\
+\eea
+%
+\bea  F_2(x, w) &=& \frac{1}{x^2}\int_0^{\pi/2} d\theta \frac{a \sin 2\theta}{(1+w \sin 2\theta)^2}\left\{ \frac{-3\pi}{2}\left(\sqrt{1-a^2} -1\right) +\frac{\pi a^2}{2\sqrt{1-a^2}} \right. \nonumber \\ && \left. +\left[\left(\frac{3-4a^2}{\sqrt{a^2-1}} \right)\left(-\frac{1}{2}\ln (1-2a(a+\sqrt{a^2-1}))\right) -3a \right] \right\},
+\eea
+%
+\bea  F_3(x, w) = \frac{1}{x}\left\{\pi\left(\sqrt{1-x^2}-1\right)-2\left[\frac{1}{2}\sqrt{x^2-1}\ln (1-2x(x+\sqrt{x^2-1}))-x \right] \right\},
+\eea
+%
+where
+%
+\bea a=\frac{x \cos \theta}{\sqrt{1+w \sin 2\theta}}.
+\eea
+
+One could also add polynomial dependence in $m_q$, $w$, and $a^2$ to the expressions presented here, though these would be higher order in the chiral power counting.  Note that $h_-(w)$ receives no chiral log corrections, so it should be much easier to set up a fitter for it.  The notation for the staggered mesons is that of hep-lat/0512007.  The full QCD $\chi$PT expressions for $w\neq 1$ were derived in Chow and Wise, PRD 48 5202 (1993), though I have modified the expressions somewhat to conform to my Mathematica code and the notation of hep-lat/0512007.  (I have a Mathematica code for evaluating Eq.~(\ref{eq:h+full}).)
+
+\begin{thebibliography}{99}
+
+
+\end{thebibliography}
+
+
+\end{document}
+

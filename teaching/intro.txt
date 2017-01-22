@@ -1,0 +1,27 @@
+This project is intended for students who do not have prior experience with
+UNIX and the C programming language, or would like to refresh their knowledge
+before attempting the later projects. The project will introduce the UNIX
+operating system, the vi editor, the gnuplot plotting program and basic C
+programming. The first few pages of this project are intended to be used as a
+reference. You will become familiar with these commands as you use them in the
+practical sessions.
+
+The Unix operating system is widely used in both servers and workstations.
+There are many variants of the Unix operating system which come from different
+vendors (e.g Sun Microsystems' Solaris, IBM's AIX, etc.). You will be using
+the Windows PCs in the computing lab (or your own computer) to log into a
+server running Linux, an open-source implementation of the Unix operating
+system.
+
+There are two editors available on the Linux server: vi and nano.  The vi
+editor has two modes of operation and takes some getting used to at first. It
+is worth leaning vi, as it ubiquitous on Unix systems and very powerful.
+However, if you find that trying to learn vi is slowing you down, you can use
+nano which has an interface similar to the Windows notepad.
+
+For many of you this will be your first experience of using a Unix
+workstation. There are many different exercises in this section. Don't think
+that you have to complete them all in the first class. The idea is that you
+become familiar with these at your own pace. If all of this is very new to
+you, you should plan on spending extra time on these exercises before the next
+class.
