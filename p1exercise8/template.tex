@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage{geometry,color,graphicx}
+
+\begin{document}
+
+\title{Title template}
+
+\author{Gabriel Smadi\\
+  College of Engineering,
+  Physics Department, \\
+  Syracuse University,\\
+  \texttt{gsmadi@syr.edu}}
+\maketitle
+
+\begin{abstract}
+Abstract goes here.
+\end{abstract}
+
+\section{Introduction}
+This section's content...
+
+\section{Content}
+This section's content...
+
+\begin{equation} \label{eq:1}
+x=B\cos(\omega t)
+\end{equation}
+
+\begin{equation} \label{eq:2}
+v=-\omega B\cos(\omega t)
+\end{equation}
+
+\begin{equation} \label{eq:3}
+a=-\omega^2 B\cos(\omega t)
+\end{equation}
+
+\begin{figure}
+  \begin{center}
+    \include{position}
+  \end{center}
+  \caption{Position}
+  \label{fig:position}
+\end{figure}
+
+Figure \ref{fig:position} shows a graph of the position of a particle. Equation \ref{eq:1} is the position of the particle.
+
+\begin{figure}
+  \begin{center}
+    \include{velocity}
+  \end{center}
+  \caption{Velocity}
+  \label{fig:velocity}
+\end{figure}
+
+Figure \ref{fig:velocity} shows a graph of the velocity of a particle. Equation \ref{eq:2} is the velocity of the particle.
+
+\begin{figure}
+  \begin{center}
+    \include{acceleration}
+  \end{center}
+  \caption{Acceleration}
+  \label{fig:acceleration}
+\end{figure}
+
+Figure \ref{fig:acceleration} shows a graph of the acceleration of a particle. Equation \ref{eq:3} is the acceleration of the particle.
+
+\section{Conclusion}
+This section's content...
+
+
+\begin{thebibliography}{9}
+
+	\bibitem{lamport94}
+	  Leslie Lamport,
+	  \emph{\LaTeX: A Document Preparation System}.
+	  Addison Wesley, Massachusetts,
+	  2nd Edition,
+	  1994.
+
+\end{thebibliography}
+\end{document}
