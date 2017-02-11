@@ -2,25 +2,33 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define MIN_LIMIT 0.0000001
+#define MIN_LIMIT 0.001
+#define DELTA_H 0.01
 
 float compute_derivative_sine(float point_x, float h);
 
 int main( int argc, char *argv[] )
 {
-  double actual, computed;
-  double h = 5.0;
+  FILE *fp;
+  float actual, computed, error;
+  float h = 5.0;
+  float x = 0.0;
+  // Open data file
+  fp = fopen( "errors_0.dat", "w" );
 
   while(h > MIN_LIMIT) {
-    for (double x = 0.0; x < M_PI; x=x+0.1) {
+    //for (float x = 0.0; x < M_PI; x=x+(M_PI/16)) {
       actual = cos(x);
       computed = compute_derivative_sine(x, h);
+      error = computed - actual;
 
-      printf("Computed = %lf; Actual = %lf, h = %lf\n", computed, actual, h);
-    }
+      fprintf(fp, "%lf %lf\n", h, fabs(error));
+    //}
 
-    h = h - 0.1;
+    h = h - DELTA_H;
   }
+
+  fclose(fp);
 
   return 0;
 }
