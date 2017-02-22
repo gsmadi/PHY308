@@ -24,11 +24,15 @@ int main( int argc, char *argv[] )
     double b = 2.0;
     double h = (b - a)/(N - 1.0);
     double ans, actual = 3.46;
+    double actual_error = 0.0;
 
     ans = trap(func, a, b, h);
 
+    actual_error = (1.0/12.0)*(b - a)*pow(h, 2)*(1.333);
+
     printf("Trapezoidal Rule for N = %d\n", N);
-    fprintf( stdout, "Computed = %lf, Actual = %lf, Error = %lf\n", ans, actual, (ans-actual));
+    fprintf( stdout, "Computed = %lf, Actual = %lf, Error = %lf, Error bound = %lf\n", ans, actual, (ans-actual), actual_error);
+
 
     return 0;
 }

@@ -2,12 +2,11 @@
 #include <stdlib.h>
 #include <math.h>
 
-double trap( double (*func)(double x), double a, double b, double h ) {
+double simp( double (*func)(double x), double a, double b, double h) {
     double sum = 0.0, w_i = 0.0;
     int i = 0;
 
-
-    for (double x_i = a + h; x_i < b - h; x_i = x_i + h) {
+    for (double x_i = a + h; floorf(x_i*100)/100 <= b - h; x_i = x_i + h) {
         if (i % 2 == 0) {
             w_i = 4.0/3.0;
         } else {
@@ -17,8 +16,7 @@ double trap( double (*func)(double x), double a, double b, double h ) {
         i++;
     }
 
-
-    return (h*(((func(b) + func(a))/3.0) + sum));
+    return h*(((func(b) + func(a))/3.0) + sum);
 }
 
 double func(double x) {
@@ -32,11 +30,14 @@ int main( int argc, char *argv[] )
     double b = 2.0;
     double h = (b - a)/(N - 1.0);
     double ans, actual = 3.46;
+    double actual_error = 0.0;
 
-    ans = trap(func, a, b, h);
+    ans = simp(func, a, b, h);
+
+    actual_error = (1.0/90.0)*pow((b-a)/2.0, 5)*(16.0/105.0);
 
     printf("Simpson's Rule for N = %d\n", N);
-    fprintf( stdout, "Computed = %lf, Actual = %lf, Error = %lf\n", ans, actual, (ans-actual));
+    fprintf( stdout, "Computed = %lf, Actual = %lf, Error = %lf, Error bound = %lf\n", ans, actual, fabs(ans-actual), actual_error);
 
     return 0;
 }
