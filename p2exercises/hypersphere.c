@@ -11,25 +11,20 @@ double frand(double frmin, double frmax)
 
 // Hypersphere volume approximation
 double nball_volume(int dim, double r, unsigned long N) {
-    double volume = 0.0, x_i[dim][N];
+    double volume = 0.0, x_i[dim];
     int in_nball = 0, in_hypercube = 0;
     double condition = 0.0;
-    
+
     // Initialize random number generator
     srand(time(NULL));
 
-    // Initialize random value array
-    for (int i = 0; i < dim; i++) {
-        for (int j = 0; j < N; j++) {
-            x_i[i][j] = frand(0.0, r);
-        }
-    }
-
     // Compute volume of nball
     for (int i = 0; i < N; i++) {
+
         for (int j = 0; j < dim; j++) {
             // Compute condition
-            condition += pow(x_i[j][i], 2);
+            x_i[j] = frand(0.0, r);
+            condition += pow(x_i[j], 2);
         }
 
         if (condition <= pow(r, 2)) {
@@ -41,7 +36,6 @@ double nball_volume(int dim, double r, unsigned long N) {
 
         condition = 0.0; // Initialize condition for next iteration
     }
-    printf("inside = %d, outside = %d\n", in_nball, in_hypercube);
 
     volume = (in_nball / (double)(in_hypercube));
 
