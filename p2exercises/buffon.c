@@ -27,14 +27,14 @@ double mc(double t, double l, double* error, int N) {
     // Initialize random number generator
     srand(time(NULL));
 
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i <= N; i++) {
         x = frand(0.0, t/2.0);
         theta = frand(0.0, M_PI*0.5);
 
         if (x <= (0.5*l)*sin(theta)) {
           n += 1;
 
-          estimate = (2*l*N)/(n*t);
+          estimate = (2*l*i)/(n*t);
           estimate_sum += estimate;
           estimate_sum_squared += pow(estimate, 2);
         }
@@ -56,7 +56,7 @@ int main( int argc, char *argv[] )
     double l = atof(argv[2]);
     double pi_estimate = 0.0, error = 0.0;
 
-    for (N = 1; N <= 10000000; N = N * 10) {
+    for (N = 1; N <= 100000000; N = N * 10) {
       pi_estimate = mc(t, l, &error, N);
 
       printf("Simulation for %d needle throws\n", N);
