@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage{geometry,color,graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+
+\begin{document}
+
+\title{Project 1: Derivatives and Simple Harmonic Oscillators}
+
+\author{Gabriel Smadi\\
+  College of Engineering, \\
+  Physics Department, \\
+  Syracuse University,\\
+  \texttt{gsmadi@syr.edu}}
+\maketitle
+
+\begin{abstract}
+\end{abstract}
+
+\section{Introduction}
+
+\section{Numerical derivative}
+By definition of the derivative,
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      x & Computed & Actual & Error \\
+      \hline
+      \( 0 \) & -0.191785 & 1.000000 & -1.191785 \\
+      \hline
+      \( \frac{\pi}{8} \) & -0.232012 & 0.923880 & -1.155892 \\
+      \hline
+      \( \frac{\pi}{4} \) & -0.236918 & 0.707107 & -0.944025 \\
+      \hline
+      \( \frac{3 \pi}{8} \) & -0.205755 & 0.382683 & -0.588438 \\
+      \hline
+      \( \frac{\pi}{2} \) & -0.143268 & 0.000000 & -0.143267 \\
+      \hline
+      \( \frac{5 \pi}{8} \) & -0.058969 & -0.382684 & 0.323714 \\
+      \hline
+      \( \frac{3 \pi}{4} \) & 0.034307 & -0.707107 & 0.741414 \\
+      \hline
+      \( \frac{7 \pi}{8} \) & 0.122360 & -0.923880 & 1.046239 \\
+      \hline
+      \( \pi \) & 0.191785 & -1.000000 & 1.191785 \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \caption {Computed and actual values of \( \frac{d \sin(x)}{dx} \) for $h=5.0$}
+  \label{table:comparison}
+\end{table}
+
+
+\begin{figure}[H]
+  \begin{center}
+    \scalebox{.8}{\input{actual_computed}}
+  \end{center}
+  \caption{Actual vs. Computed derivatives for different $h$}
+  \label{fig:actual_computed}
+\end{figure}
+
+From Figure \ref{fig:derivative}, the error of our computed value can be seen as a function of $x$. We can see in the
+graph how the errors converge to 0 as $h \to 0$.
+
+\begin{figure}[H]
+  \begin{center}
+    \scalebox{.8}{\input{derivative}}
+  \end{center}
+  \caption{Convergence of errors as $h\to 0$}
+  \label{fig:derivative}
+\end{figure}
+
+In Figure \ref{fig:errors}, we see the magnitude of our errors as a function of $h$. To no
+surprise, it is clear that as $h \to 0$ our errors $err(h) \to 0$.Note that for greater
+$h$ the errors may appear to oscillate. This is due to the periodic nature of the functions we are
+investigating. However, rest assured that as we minimize $h$ to $0$ we will automatically minimize
+our errors $err(h)$.
+
+\begin{figure}[H]
+  \begin{center}
+    \scalebox{.8}{\input{errors}}
+  \end{center}
+  \caption{Errors as a function of $h$}
+  \label{fig:errors}
+\end{figure}
+
+For our purposes, floats are more that sufficient for the precision we require. However, for greater
+precision doubles would be used. Doubles can hold 15 decimal places as compared to floats, which can
+only hold 7. Thus, by using doubles instead of floats we could get much more precision. But in our situation,
+there would not be much of an advantage. We can further minimize our errors, but for big $h$ those errors shall
+still remain either way.
+
+
+\section{Simple Harmonic Oscillator}
+
+The most common expressions for a simple harmonic oscillator are given below,
+
+\begin{equation} \label{eq:2}
+x(t)=B\cos(\omega t)
+\end{equation}
+
+\begin{equation} \label{eq:3}
+v(t)=-\omega B\cos(\omega t)
+\end{equation}
+
+\begin{equation} \label{eq:4}
+a(t)=-\omega^2 B\cos(\omega t)
+\end{equation}
+
+Below in Figure \ref{fig:sho}, we take a different approach to investigate a simple harmonic
+oscillator. In the plots we investigate the relationship of the acceleration and velocity of
+the SHO against its displacement. In other words, the acceleration $a$  and velocity $v$ as a function
+of position $x$. For even small $n$, it is apparent the linear relationship of the acceleration to
+the position. However, for the velocity the relationship is not quite clear.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.35\textwidth}
+        \scalebox{.8}{\input{sho10}}
+        \caption{$n=10$}
+        \label{fig:sho10}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.35\textwidth}
+        \scalebox{.8}{\input{sho50}}
+        \caption{$n=50$}
+        \label{fig:sho50}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \scalebox{.8}{\input{sho1000}}
+        \caption{$n=1000$}
+        \label{fig:sho1000}
+    \end{subfigure}
+    \caption{Simple harmonic oscillator plot smoothing as $n$ increases}\label{fig:sho}
+\end{figure}
+
+As $n \to \infty$, the shape of the velocity curve is much more clear. Interestingly, the
+velocity is $0$ when displacement is maximum, and velocity is maximum when displacement is
+$0$. The shape of the curve become much smoother with larger $n$, which is simply due to
+the fact that we have more data points to represent the relationship.
+
+\section{Conclusion}
+
+We investigated the nature of errors when numerically computing derivatives. To the same conclusion
+any student of elementary calculus could conclude, the gradient is much more accurate as $h \to 0$. Also, important
+to note that depending on the data type we use (e.g. double vs. float) our precision will be affected. Generally speaking,
+floats can store up to 7 decimals places, while doubles can store 15 decimals places. Hence, doubles have double the capacity
+of floats, which explains the name.
+
+For the simple harmonic oscillator experiment, the most important take away is to try to achieve as many data
+points as permitted. However, computationally speaking as scientist we must also be savvy of our computational
+bottlenecks. As data points increase, our precision might increase, yet our memory and processor consumption will
+to. Thus, for later work such considerations can be explored and even quantified. While
+investigating much experience was gained of using scientific computing tools such as gnuplot, Latex and C programming.
+
+\begin{thebibliography}{9}
+
+	\bibitem{lamport94}
+	  Leslie Lamport,
+	  \emph{\LaTeX: A Document Preparation System}.
+	  Addison Wesley, Massachusetts,
+	  2nd Edition,
+	  1994.
+
+  \bibitem{lamport94}
+	  Andrew Roberts,
+	  \emph{Getting to Grips with Latex}.
+    http://www.andy-roberts.net/writing/latex
+
+  \bibitem{lamport94}
+	  ShareLaTex Documentation,
+    http://www.andy-roberts.net/writing/latex
+
+  \bibitem{lamport94}
+	  Latex Wikibook.
+    https://en.wikibooks.org/wiki/LaTeX
+
+  \bibitem{lamport94}
+	  C Data types,
+    https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Real-Number-Types
+
+\end{thebibliography}
+\end{document}
