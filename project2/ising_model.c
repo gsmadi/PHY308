@@ -54,6 +54,34 @@ void print_lattice(int lattice[]) {
     printf("\n\n");
 }
 
+// Save lattice configuration to file
+void save_lattice(int lattice[], double T) {
+    FILE *lattice_file;
+    char filename[80] = "";
+
+    // Set data file name
+    sprintf(filename, "./data/lattice-%d-%lf.csv", L, T);
+
+    // Open data file for current L
+    lattice_file = fopen(filename, "w");
+
+    for (int i = 0; i < L*L; ++i) {
+        if (lattice[i] == 1) {
+            fprintf(lattice_file, "1 "); // Spin up
+        } else {
+            fprintf(lattice_file, "-1 "); // Spin up
+        }
+
+        if (i != L*L && (i + 1) % L == 0) {
+            fprintf(lattice_file, "\n");
+        }
+    }
+
+    fclose(lattice_file);
+
+    printf("\n\n");
+}
+
 double hamiltonian(int lattice[], int state) {
     double energy = 0.0;
     int right = 0, left = 0, above = 0, below = 0;
@@ -109,17 +137,14 @@ void metropolis(int lattice[], double T) {
     int random_state = 0;
     double random_num = 0.0;
     double delta_E = 0.0;
-    double mag = 0.0, mag_absolute = 0.0, magnetic_susceptability = 0.0;
+    double mag = 0.0, magnetic_susceptability = 0.0;
     double mag_total = 0.0, mag_total_squared = 0.0, mag_absolute_total = 0.0;
     double mag_average = 0.0, mag_absolute_average = 0.0;
     double mag_squared_average = 0.0, mag_squared_average_per_spin = 0.0;
     double normalization_constant = (double)(1.0/(N*MONTE_CARLO_STEPS));
 
-    //transient_results(lattice, T);
-
     // Initialize observable
     mag = total_magnetization(lattice);
-    mag_absolute = abs(total_magnetization(lattice));
 
     // Monter Carlo loop
     for (int i = 0; i < MONTE_CARLO_STEPS; i++) {
@@ -136,13 +161,13 @@ void metropolis(int lattice[], double T) {
                 lattice[random_state] = -lattice[random_state];
 
                 // Store change in observable
+                // Flip due to heat bath
                 mag += 2*lattice[random_state];
             } else {
                 // Decide to flip randomly
                 random_num = frand(0.0, 1.0);
 
                 if (random_num < exp(-delta_E/(K_B*T))) {
-                    // Flip due to heat bath
                     lattice[random_state] = -lattice[random_state];
 
                     // Store change in observable

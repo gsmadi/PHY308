@@ -30,7 +30,7 @@ double moment_of_inertia(double a, double b, double c, double M, int N, double *
     srand(time(NULL));
 
     // Set data file name
-    sprintf(filename, "./data/inertia-sim-%d.csv", N);
+    sprintf(filename, "./data/inertia-circle-sim-%d.csv", N);
 
     // Open data file for current L
     simulation = fopen(filename, "w");
@@ -66,22 +66,22 @@ int main( int argc, char *argv[] )
     double b = atof(argv[2]);
     double c = atof(argv[3]);
     double M = atof(argv[4]);
-    double ans = 0.0, std = 0.0;
+    double ans = 0.0, sme = 0.0;
 
     // Set data file name
-    sprintf(filename, "./data/inertia.csv");
+    sprintf(filename, "./data/inertia-circle.csv");
 
     // Open data file for current L
     results = fopen(filename, "w");
 
     for (int N = 10; N < 100000000; N *= 10) {
-      ans = moment_of_inertia(a, b, c, M, N, &std);
+      ans = moment_of_inertia(a, b, c, M, N, &sme);
 
       printf("Moment of inertia of crescent for N = %d\n", N);
-      printf("I = %lf +/-%lf\n", ans, std);
+      printf("I = %lf +/-%lf\n", ans, sme);
 
       // Save results to file
-      fprintf(results, "%d, %lf, %lf\n", N, ans, std);
+      fprintf(results, "%d, %lf, %lf\n", N, ans, sme);
     }
 
     // Close results file

@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
     FILE *results;
     char filename[80] = "";
     double r = atof(argv[1]);
-    double ans = 0.0, std = 0.0, percentage_error = 0.0;
+    double ans = 0.0, sme = 0.0, percentage_error = 0.0;
     double actual_circle = M_PI * pow(r, 2); // Circle
     double actual_sphere = (4.0/3.0) * M_PI * pow(r, 3); // Sphere
     double actual_ten_dim = pow(M_PI, 5) * pow(r, 10) / 120.0; // V_10 - 10 dimensions
@@ -100,12 +100,12 @@ int main(int argc, char *argv[]) {
       for (int N = 10; N < 1000000000; N = N * 10) {
           printf("Hypersphere volume of dimension %d for N = %d\n", dim, N);
 
-          ans = nball_volume(dim, r, N, &std);
+          ans = nball_volume(dim, r, N, &sme);
 
-          printf("Computed = %lf +/- %lf\n\n", ans, std);
+          printf("Computed = %lf, sme = %lf\n\n", ans, sme);
 
           // Save results to file
-          fprintf(results, "%d, %lf, %lf\n", N, ans, std);
+          fprintf(results, "%d, %lf, %lf\n", N, ans, sme);
       }
 
       // Close results file
