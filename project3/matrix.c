@@ -44,8 +44,8 @@ int main(void) {
 
     for (int i = 0; i < 3; i++)
     {
-      double eval_i = gsl_vector_get (eval, i);
-      gsl_vector_view evec_i = gsl_matrix_column (evec, i);
+      double eval_i = gsl_vector_get(eval, i);
+      gsl_vector_view evec_i = gsl_matrix_column(evec, i);
 
       printf ("Eigenvalue = %g\n", eval_i);
       printf ("Eigenvector = \n");
