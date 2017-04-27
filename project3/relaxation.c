@@ -2,7 +2,7 @@
 #include <math.h>
 #include <time.h>
 
-#define MAX_LAT_SIZE 100
+#define MAX_LAT_SIZE 500
 
 double MIN_DELTA = 0.000001;
 int L = 100; // Lattice size
@@ -86,6 +86,8 @@ int main(int argc, char const *argv[]) {
   int N = 0; // Total lattice elements
   clock_t start, end;
   double computation_time;
+  FILE *relaxation_file;
+  char filename[80] = "";
 
   printf("Running Simulation for over-relaxation of Laplace's equation\n");
 
@@ -94,8 +96,14 @@ int main(int argc, char const *argv[]) {
 
     N = L * L; // Total grid point in lattice
 
+    // Set data file name
+    sprintf(filename, "./data/relaxation-op-%d.csv", L);
+
+    // Open data file for current L
+    relaxation_file = fopen(filename, "w");
+
     // Run simulation for many relaxation factors
-    for (double f = 1.0; f < 1.99; f += 0.01) {
+    for (double f = 1.9300; f <= 1.9999; f += 0.0001) {
       // Initialize lattice with boundry condition
       for (int i = 0; i < N; i++) {
         // Top of lattice at 100 degrees (absolute units)
@@ -133,16 +141,18 @@ int main(int argc, char const *argv[]) {
       f_opt = 2.0 - (2.0*M_PI/L);
 
       if (compare_double(f, f_opt, 0.005)) {
-        save_lattice(lattice, f);
+        //save_lattice(lattice, f);
       }
 
       printf("comp_time: %lf, iter: %d, f = %lf\n", computation_time, iter, f);
+      fprintf(relaxation_file, "%lf, %lf, %d\n", f, computation_time, iter);
 
       avg_delta = 1.0;
       iter = 0;
     }
 
     /******************* Actual temperature lattice ******************/
+    /*
     for (int i = 0; i < L; i++) {
       for (int j = L; j < L; j++) {
         for (double n = 3.0; n <= 39.0; n += 2) {
@@ -154,11 +164,12 @@ int main(int argc, char const *argv[]) {
       }
     }
 
-    printf("Saving actual lattice \n");
     save_lattice(lattice, 0.0);
+    */
     /*****************************************************************/
 
     L += 100;
+    fclose(relaxation_file);
   }
 
   return 0;
