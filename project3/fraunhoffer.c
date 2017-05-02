@@ -16,7 +16,7 @@ double fraunhoffer_amplitude(double x, void *p) {
 
 int main (void)
 {
-  double k = 589.29E-9;
+  double k = 2*M_PI/589.29E-9;
   double a = 2.8E-6;
   int status = GSL_CONTINUE;
   int iter = 0, max_iter = 100;
@@ -39,7 +39,7 @@ int main (void)
          "iter", "lower", "upper", "root",
          "err", "err(est)");
 
-  while (root < 200.0) {
+  while (root < (k*a/2) - 0.1) {
       s = gsl_root_fsolver_alloc(T);
 
       printf("[%lf, %lf]\n", x_hi, x_lo);
@@ -65,8 +65,8 @@ int main (void)
 
       n += 1;
 
-      x_lo += M_PI*n;
-      x_hi += M_PI*(n+1);
+      x_lo = M_PI*n;
+      x_hi = M_PI*(n+1);
 
       status = GSL_CONTINUE;
       iter = 0;

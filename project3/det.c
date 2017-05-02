@@ -17,11 +17,9 @@ int main(void) {
 
     gsl_matrix_set_all(m, 2.0);
 
-
-    gsl_linalg_LU_decomp(m, p, &s);
-
     start = clock();
 
+    gsl_linalg_LU_decomp(m, p, &s);
     det = gsl_linalg_LU_det(m, s);
 
     end = clock();
