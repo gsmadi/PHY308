@@ -5,18 +5,20 @@
 
 int main(void) {
   double matrix[] = { 1.0, 2.0, 3.0, 2.0, 2.0, 3.0, 3.0, 3.0, 3.0 };
+  double em[] = { 1.0, 2.0, 3.0, 2.0, 2.0, 3.0, 3.0, 3.0, 3.0 };
   double inva[9];
 
   int s;
   double det;
 
   gsl_matrix_view mat = gsl_matrix_view_array(matrix, 3, 3);
+  gsl_matrix_view eigen = gsl_matrix_view_array(em, 3, 3);
   gsl_matrix_view inv = gsl_matrix_view_array(inva,3,3);
-  gsl_permutation * p = gsl_permutation_alloc (3);
+  gsl_permutation * p = gsl_permutation_alloc(3);
 
-  gsl_vector* eval = gsl_vector_alloc (3);
-  gsl_matrix* evec = gsl_matrix_alloc (3, 3);
-  gsl_eigen_symmv_workspace * w = gsl_eigen_symmv_alloc (3);
+  gsl_vector* eval = gsl_vector_alloc(3);
+  gsl_matrix* evec = gsl_matrix_alloc(3, 3);
+  gsl_eigen_symmv_workspace * w = gsl_eigen_symmv_alloc(3);
 
   printf("Matrix:\n");
   for (int i = 0; i < 3; ++i)
@@ -37,9 +39,9 @@ int main(void) {
 
   printf("\nEingenvalues & Eigenvectors:\n");
 
-  gsl_eigen_symmv (&mat.matrix, eval, evec, w);
-  gsl_eigen_symmv_free (w);
-  gsl_eigen_symmv_sort (eval, evec, GSL_EIGEN_SORT_ABS_ASC);
+  gsl_eigen_symmv(&eigen.matrix, eval, evec, w);
+  gsl_eigen_symmv_free(w);
+  gsl_eigen_symmv_sort(eval, evec, GSL_EIGEN_SORT_ABS_ASC);
 
 
     for (int i = 0; i < 3; i++)
@@ -52,8 +54,6 @@ int main(void) {
       gsl_vector_fprintf(stdout, &evec_i.vector, "%g");
       printf("\n\n");
     }
-
-
 
   gsl_permutation_free (p);
   gsl_vector_free (eval);
