@@ -97,16 +97,19 @@ discrepancy_matrix_500 = np.abs(temp_500 - actual_500)
 dis_500 = np.array(discrepancy_matrix_500, dtype=float)
 
 
-fig, axarr = plt.subplots()
-fig1, axarr1 = plt.subplots()
-fig2, axarr2 = plt.subplots()
+fig, axarr = plt.subplots(nrows=1, ncols=2,
+                          gridspec_kw={'width_ratios': [1, 1]})
 
-cax = axarr.imshow(temp_500, cmap=plt.cm.hot, aspect='equal')
-cbar = fig.colorbar(cax)
+cax = axarr[0].imshow(temp_500, cmap=plt.cm.hot)
+axarr[0].set(title='Simulated')
+cax = axarr[1].imshow(actual_500, cmap=plt.cm.hot)
+axarr[1].set(title='Actual')
 
-cax1 = axarr1.imshow(actual_500, cmap=plt.cm.hot, aspect='equal')
-cbar1 = fig1.colorbar(cax1)
+# Add colorbar axis
+fig.subplots_adjust(right=0.95)
+cbar_ax = fig.add_axes([0.98, 0.15, 0.05, 0.7])
+fig.colorbar(cax, cax=cbar_ax)
 
-cax2 = axarr2.imshow(dis_400, cmap=plt.cm.binary, aspect='equal')
-cax3 = axarr2.imshow(dis_400, cmap=plt.cm.binary, aspect='equal')
-cbar2 = fig2.colorbar(cax2)
+fig.tight_layout()
+fig.suptitle('Lattice temperature comparison', fontsize=14)
+fig.savefig('../plots/temp_comp.png', dpi=200, bbox_inches='tight')

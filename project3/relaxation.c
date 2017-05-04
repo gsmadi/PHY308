@@ -36,7 +36,7 @@ double update_temp(double lattice[], int location, double f) {
 
   // Above neighbor
   if (location < L) {
-    above = 0.0;
+    above = 100.0;
   } else {
     above = lattice[location - L];
   }
@@ -108,7 +108,7 @@ int main(int argc, char const *argv[]) {
       for (int i = 0; i < N; i++) {
         // Top of lattice at 100 degrees (absolute units)
         if (i < L) {
-          lattice[i] = 100.0;
+          lattice[i] = 0.0;
         } else {
           lattice[i] = 0.0;
         }
@@ -119,7 +119,7 @@ int main(int argc, char const *argv[]) {
 
       // Update lattice until desired delta is achieved
       while (avg_delta > MIN_DELTA) {
-        for (int i = L; i < N; i++) {
+        for (int i = 0; i < N; i++) {
           old = lattice[i];
           new = update_temp(lattice, i, f);
 
