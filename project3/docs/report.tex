@@ -18,73 +18,82 @@
 \maketitle
 
 \begin{abstract}
-Abstract here...
+The GSL library is utilized to solve common computational problems such as root finding
+and matrix computations. The Laplace equation is solved utilizing the method of over-relaxation.
+The performance of some algorithms are explored and quantified, such as computing matrix determinants
+and speedup improvements of solving the Laplace equation by using the optimal relaxation factor.
 \end{abstract}
 
 \section{Introduction}
 
-Intro here...
+Having the ability to implement numerical algorithms is useful yet can be error prone. The educational outcomes of implementing
+such algorithms is fruitful, yet ill advised in production or formal research environments. The best practice when robust numerical
+algorithms are needed is to utilized mature and thoroughly tested software libraries or packages. In this project, the GNU
+Scientific Library (GSL) is utilized to solve some illustrative numerical problems and to get some experience using software
+developed by others. Also, in this project we solve the Laplace equation b the method of over-relaxation. Solving the
+Laplace equation numerically proves to be simple, yet by making use of a relaxation factor we will see how it greatly improves the
+performance of the algorithm.
 
 \section{Fraunhoffer Diffraction}
 
-Fraunhoffer here...
+The Fraunhoffer diffraction amplitude is given by,
+
+\begin{equation}
+\label{eq:fraun_amp}
+  A = A_{0}\frac{\sin{x}}{x}
+\end{equation}
 
 \begin{figure}[H]
   \begin{center}
-    \scalebox{.8}{\includegraphics{fraun_amplitude}}
+    \scalebox{.6}{\includegraphics{fraun_amplitude}}
   \end{center}
-  \caption{Convergence of errors as $h\to 0$}
-  \label{fig:mag_susc}
-\end{figure}
-
-\begin{figure}[H]
-  \begin{center}
-    \scalebox{.8}{\includegraphics{fraun_root}}
-  \end{center}
-  \caption{Convergence of errors as $h\to 0$}
-  \label{fig:mag_susc}
-\end{figure}
-
-\begin{figure}[H]
-  \begin{center}
-    \scalebox{.8}{\includegraphics{fraun_int}}
-  \end{center}
-  \caption{Convergence of errors as $h\to 0$}
-  \label{fig:mag_susc}
+  \caption{Fraunhoffer amplitude}
+  \label{fig:fraun_amp}
 \end{figure}
 
 \begin{table}[H]
   \begin{center}
     \begin{tabular}{|c|c|c|c|}
       \hline
-      Iterations & Computed & Error \\
+      Root & Angle(Radians) & Angle(Degrees) \\
       \hline
-      10 & 0.0 & 100\% \\
+      4.493030 & 0.305737 & 17.52 \\
       \hline
-      100 & 0.0 & 100\% \\
+      7.728195 & 0.544190 & 31.18 \\
       \hline
-      1000 & 1.024 & 59.8\% \\
+      10.906603 & 0.819277 & 46.94 \\
       \hline
-      10000 & 2.8672 & 12.4\% \\
-      \hline
-      100000 & 2.580480 & 1.2\% \\
-      \hline
-      1000000 & 2.56 & 0.4\% \\
-      \hline
-      10000000 & 2.560205 & 0.4\% \\
-      \hline
-      100000000 & 2.542408 & 0.3\% \\
+      14.069672 & 1.230188 & 70.48 \\
       \hline
     \end{tabular}
   \end{center}
-  \caption {Volume approximation of 10 dimensional hypersphere for several  $N$ iteration.}
-  \label{tab:circle_results}
+  \caption {Fraunhoffer roots and corresponding angles}
+  \label{tab:fraun_roots}
 \end{table}
+
+\begin{figure}[H]
+  \begin{center}
+    \scalebox{.8}{\includegraphics{fraun_root}}
+  \end{center}
+  \caption{Fraunhoffer diffraction pattern roots}
+  \label{fig:fraun_roots}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \scalebox{.8}{\includegraphics{fraun_int}}
+  \end{center}
+  \caption{Fraunhoffer intensity and diffraction pattern}
+  \label{fig:fraun_int}
+\end{figure}
 
 
 \section{Matrix Computations}
 
-Matrix here...
+Matrix computations are necessary are prevalent in many physical computations and numerical problems. In this exercise we explore
+the GSL library subroutines for matrix computations and property extraction.
+
+For these exercises, the following $3 \times 3$ matrix is used,
 
 \begin{equation}
  \label{eq:mat}
@@ -94,6 +103,8 @@ Matrix here...
        3 & 3 & 3 \\[0.3em]
       \end{bmatrix}
 \end{equation}
+
+The
 
 \begin{equation}
  \label{eq:mat}
@@ -139,7 +150,7 @@ e_{3} = \begin{bmatrix}
   \begin{center}
     \scalebox{.8}{\includegraphics{det_plot}}
   \end{center}
-  \caption{Convergence of errors as $h\to 0$}
+  \caption{Determinant computation time for different matrix sizes}
   \label{fig:mag_susc}
 \end{figure}
 
@@ -152,7 +163,7 @@ Relax...
   \begin{center}
     \scalebox{.8}{\includegraphics{iter_plot}}
   \end{center}
-  \caption{Convergence of errors as $h\to 0$}
+  \caption{Number of iterations to achieve desired accuracy as a function of the relaxation factor}
   \label{fig:mag_susc}
 \end{figure}
 
@@ -160,7 +171,7 @@ Relax...
   \begin{center}
     \scalebox{.8}{\includegraphics{iter_op_plot}}
   \end{center}
-  \caption{Convergence of errors as $h\to 0$}
+  \caption{Visualization of the optimal relxation factor for different lattice sizes}
   \label{fig:mag_susc}
 \end{figure}
 
@@ -168,7 +179,7 @@ Relax...
   \begin{center}
     \scalebox{.8}{\includegraphics{temp_comp}}
   \end{center}
-  \caption{Convergence of errors as $h\to 0$}
+  \caption{Lattice temperature comparison}
   \label{fig:mag_susc}
 \end{figure}
 
@@ -187,10 +198,10 @@ Conclusion here...
   \bibitem{lamport94}
     Wikipedia contributors. "Square-lattice Ising model." Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 26 Mar. 2016.
 
-    \bibitem{lamport94}
-  	  Jacques Kotze,
-  	  \emph{Introduction to Monte Carlo methods for an Ising model of ferromagnetism}.
-      \tt{arXiv:cond-mat.stat-mech/0803.0217}
+  \bibitem{lamport94}
+	  Jacques Kotze,
+	  \emph{Introduction to Monte Carlo methods for an Ising model of ferromagnetism}.
+    \tt{arXiv:cond-mat.stat-mech/0803.0217}
 
 \end{thebibliography}
 \end{document}
