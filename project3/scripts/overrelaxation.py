@@ -43,7 +43,9 @@ lat_op_500 = pd.read_csv('../data/relaxation-op-500.csv', header=None,
 
 lat_op_100.describe()
 lat_op_200.describe()
+lat_op_300.describe()
 lat_op_400.describe()
+lat_op_500.describe()
 
 
 # Iterations versus factor plot
